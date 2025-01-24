@@ -16,7 +16,6 @@
         <form action="" method="post">
             {% csrf_token %}
             
-            <!-- Pola formularza -->
             <div class="row">
                 <div class="col-md-6 mb-3">
                     {{ form.firstname.label_tag }}
@@ -40,7 +39,6 @@
                 </div>
             </div>
 
-            <!-- Przyciski akcji -->
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-warning px-4">✏️ Zaktualizuj trenera</button>
             </div>
