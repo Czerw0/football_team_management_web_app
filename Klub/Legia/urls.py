@@ -1,11 +1,8 @@
 from django.urls import path
-
-# importujemy moduł views (plik views.py z tego samego katalogu co plik bieżący)
 from . import views
 
-# definiujemy zmienną urlpatterns, która jest listą mapowań adresów URL na nasze widoki
 urlpatterns = [
-    path('', views.welcome_view, name='home'),  # Strona główna
+    path('', views.welcome_view, name='base'),  # Home page
     path('players', views.player_list, name='player-list'),
     path('player/<int:id>', views.player_detail, name='player-detail'),
     path('player/add', views.player_create, name='player-create'),
@@ -16,4 +13,9 @@ urlpatterns = [
     path('coach/add', views.coach_create, name='coach-create'),
     path('coach/<int:id>/change', views.coach_update, name='coach-update'),
     path('coach/<int:id>/delete', views.coach_delete, name='coach-delete'),
+    path('assistant', views.assistant_list, name='assistant-list'),  # Corrected views
+    path('assistant/<int:id>', views.assistant_detail, name='assistant-detail'),
+    path('assistant/add', views.assistant_create, name='assistant-create'),
+    path('assistant/<int:id>/change', views.assistant_update, name='assistant-update'),
+    path('assistant/<int:id>/delete', views.assistant_delete, name='assistant-delete'),
 ]

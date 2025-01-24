@@ -1,11 +1,12 @@
 from django.http import Http404
 from django.shortcuts import redirect, render
-from .forms import PlayerForm, CoachForm
-from .models import Player, Coach
+from .forms import PlayerForm, CoachForm, AssistantForm
+from .models import Player, Coach, Assistant
 
 
 def welcome_view(request):
     return render(request, "Legia/base.html")
+
 
 
 # PLAYER VIEWS
@@ -104,3 +105,51 @@ def coach_delete(request, id):
     except Coach.DoesNotExist:
         raise Http404("Coach not found")
     return redirect('coach-list')
+
+#------------------------------------------------------------
+def assistant_list(request):
+    assistants = Assistant.objects.filter(lastname__icontains=request.POST['phrase']) if request.method == 'POST' else Assistant.objects.all()
+    return render(request, "Legia/assistant/list.html", {'assistants': assistants})
+
+
+def assistant_detail(request, id):
+    try:
+        assistant = Assistant.objects.get(id=id)
+    except Assistant.DoesNotExist:
+        raise Http404("Assistant not found")
+    return render(request, "Legia/assistant/detail.html", {'assistant': assistant})
+
+
+def assistant_create(request):
+    if request.method == 'POST':
+        form = AssistantForm(request.POST)
+        if form.is_valid():
+            assistant = form.save()
+            return redirect('assistant-detail', assistant.id)
+    else:
+        form = AssistantForm()
+    return render(request, "Legia/assistant/create.html", {'form': form})
+
+
+def assistant_update(request, id):
+    try:
+        assistant = Assistant.objects.get(id=id)
+    except Assistant.DoesNotExist:
+        raise Http404("Assistant not found")
+    if request.method == 'POST':
+        form = AssistantForm(request.POST, instance=assistant)
+        if form.is_valid():
+            assistant = form.save()
+            return redirect('assistant-detail', assistant.id)
+    else:
+        form = AssistantForm(instance=assistant)
+    return render(request, "Legia/assistant/update.html", {'form': form})
+
+
+def assistant_delete(request, id):
+    try:
+        assistant = Assistant.objects.get(id=id)
+        assistant.delete()
+    except Assistant.DoesNotExist:
+        raise Http404("Assistant not found")
+    return redirect('assistant-list')
