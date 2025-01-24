@@ -1,0 +1,53 @@
+/* Definiowanie kolorów */
+:root {
+    --green: #1b612b;  /* Zielony */
+    --red: #aa1625;    /* Czerwony */
+    --white: #ffffff;  /* Biały */
+    --black: #222427;  /* Ciemny szary (bliski czarnemu) */
+}
+
+/* Globalne style */
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--white);  /* Tło strony na biały */
+}
+
+/* Nagłówek */
+header {
+    background-color: var(--green);  /* Zielone tło nagłówka */
+    color: var(--white);  /* Biały tekst */
+}
+
+/* Przycisk "Przejdź do listy zawodników" */
+.btn-red {
+    background-color: var(--red);  /* Czerwony przycisk */
+    border-color: var(--red);  /* Czerwony border */
+}
+
+.btn-red:hover {
+    background-color: darken(var(--red), 10%);  /* Ciemniejszy czerwony przy hover */
+    border-color: darken(var(--red), 10%);
+}
+
+/* Tło strony */
+#content {
+    padding: 20px;
+}
+
+/* Dodatkowe style dla linków i elementów */
+a {
+    color: var(--green);  /* Zielony kolor dla linków */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+h1, h2, h3 {
+    color: var(--black);  /* Ciemny tekst nagłówków */
+}
+
+.container {
+    margin-top: 30px;
+}
