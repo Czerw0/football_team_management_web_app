@@ -1,7 +1,7 @@
 from django.http import Http404
 from django.shortcuts import redirect, render
-from .forms import PlayerForm, CoachForm, AssistantForm
-from .models import Player, Coach, Assistant
+from .forms import PlayerForm, CoachForm, AssistantForm, TeamForm
+from .models import Player, Coach, Assistant, Team
 
 
 def welcome_view(request):
@@ -153,3 +153,50 @@ def assistant_delete(request, id):
     except Assistant.DoesNotExist:
         raise Http404("Assistant not found")
     return redirect('assistant-list')
+#-------------------------------------------------------------------
+def team_list(request):
+    team = Team.objects.filter(name__icontains=request.POST['phrase']) if request.method == 'POST' else Team.objects.all()
+    return render(request, "Legia/team/list.html", {'teams': team})
+
+
+def team_detail(request, id):
+    try:
+        team = Team.objects.get(id=id)
+    except Team.DoesNotExist:
+        raise Http404("Assistant not found")
+    return render(request, "Legia/team/detail.html", {'team': team})
+
+
+def team_create(request):
+    if request.method == 'POST':
+        form = TeamForm(request.POST)
+        if form.is_valid():
+            team = form.save()
+            return redirect('team-detail', team.id)
+    else:
+        form = TeamForm()
+    return render(request, "Legia/team/create.html", {'form': form})
+
+
+def team_update(request, id):
+    try:
+        team = Team.objects.get(id=id)
+    except Team.DoesNotExist:
+        raise Http404("Team not found")
+    if request.method == 'POST':
+        form = TeamForm(request.POST, instance=team)
+        if form.is_valid():
+            team = form.save()
+            return redirect('team-detail', team.id)
+    else:
+        form = TeamForm(instance=team)
+    return render(request, "Legia/team/update.html", {'form': form})
+
+
+def team_delete(request, id):
+    try:
+        team = Team.objects.get(id=id)
+        team.delete()
+    except Team.DoesNotExist:
+        raise Http404("Team not found")
+    return redirect('team-list')

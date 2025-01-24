@@ -18,4 +18,10 @@ urlpatterns = [
     path('assistant/add', views.assistant_create, name='assistant-create'),
     path('assistant/<int:id>/change', views.assistant_update, name='assistant-update'),
     path('assistant/<int:id>/delete', views.assistant_delete, name='assistant-delete'),
+    path('team', views.team_list, name='team-list'),  # Corrected views
+    path('team/<int:id>', views.team_detail, name='team-detail'),
+    path('team/add', views.team_create, name='team-create'),
+    path('team/<int:id>/change', views.team_update, name='team-update'),
+    path('team/<int:id>/delete', views.team_delete, name='team-delete'),
 ]
+
