@@ -1,0 +1,57 @@
+{% extends "Legia/base.html" %}
+
+{% block title %}Terminarz{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <!-- Header with title and add button -->
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-success">TERMINARZ</h2>
+        <a href="{% url 'game-create' %}" class="btn btn-success">Dodaj nowy mecz</a>
+    </div>
+
+    <!-- Search form -->
+    <div class="card p-4 mb-4">
+        <h5 class="card-title">Wyszukaj po przeciwniku</h5>
+        <form action="" method="post" class="form-inline">
+            {% csrf_token %}
+            <div class="form-group me-2">
+                <input 
+                    type="text" 
+                    name="phrase" 
+                    class="form-control" 
+                    placeholder="Wpisz nazwę przeciwnika" 
+                    required>
+            </div>
+            <button type="submit" class="btn btn-primary">Szukaj</button>
+        </form>
+    </div>
+
+    <!-- Games List -->
+    {% if games %}
+        {% for game in games %}
+        <div class="card mb-4 shadow-sm">
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <h5 class="card-title text-primary">{{ game.opponent }}</h5>
+                    <span class="badge bg-secondary">{{ game.date }}</span>
+                </div>
+                <p class="card-text">
+                    <strong>Drużyna Legii:</strong> {{ game.team.name|default:"Brak przypisania" }}
+                    <strong>Miejsce meczu:</strong> {{ game.game_spot }} <br>
+                    <strong>Typ rozgrywek:</strong> {{ game.game_type }} <br>
+                    <strong>Wynik:</strong> Legia {{ game.score_legia }} : {{ game.score_opponent }} {{ game.opponent }}
+                </p>
+                <div class="d-flex justify-content-end">
+                    <a href="{% url 'game-detail' game.id %}" class="btn btn-info btn-sm me-2">Szczegóły</a>
+                    <a href="{% url 'game-update' game.id %}" class="btn btn-warning btn-sm me-2">Edytuj</a>
+                    <a href="{% url 'game-delete' game.id %}" class="btn btn-danger btn-sm">Usuń</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p class="text-muted">Brak danych o meczach w terminarzu.</p>
+    {% endif %}
+</div>
+{% endblock %}

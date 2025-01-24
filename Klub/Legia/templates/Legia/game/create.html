@@ -1,0 +1,56 @@
+{% extends "Legia/base.html" %}
+
+{% block title %}DODAWANIE NOWEGO MECZU{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-success">Dodaj nowy mecz</h2>
+        <a href="{% url 'game-list' %}" class="btn btn-secondary">⟵ Powrót do listy</a>
+    </div>
+
+    <div class="card p-4">
+        <h5 class="card-title">Formularz dodawania nowegomeczu</h5>
+        <p class="text-muted mb-3">Wypełnij poniższe pola, aby dodać mecz:</p>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            
+            <div class="row">
+                <div class="col-md-6 mb-3">
+                    {{ form.opponent.label_tag }}
+                    {{ form.opponent }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.team.label_tag }}
+                    {{ form.team }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.game_spot.label_tag }}
+                    {{ form.game_spot }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.game_type.label_tag }}
+                    {{ form.game_type }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.date.label_tag }}
+                    {{ form.date }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.score_legia.label_tag }}
+                    {{ form.score_legia }}
+                </div>
+                <div class="col-md-6 mb-3">
+                    {{ form.score_opponent.label_tag }}
+                    {{ form.score_opponent }}
+                </div>
+            </div>
+
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-success px-4">✅ Dodaj mecz</button>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

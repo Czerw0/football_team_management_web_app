@@ -35,6 +35,9 @@
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'team-list' %}">Drużyna</a>
                         </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'game-list' %}">Terminarz rozgrywek</a>
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -43,7 +46,39 @@
         <!-- Main Content -->
         <main class="container mt-4">
             {% block content %}
-            {% endblock %}
+<!-- Dynamiczne Karty -->
+<section class="mt-4">
+    <div class="row">
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Liczba Zawodników</h5>
+                    <p class="card-text">Zarządzaj wszystkimi zawodnikami drużyny.</p>
+                    <a href="{% url 'player-list' %}" class="btn btn-primary">Zobacz zawodników</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Najbliższy Mecz</h5>
+                    <p class="card-text">Dowiedz się, z kim Legia gra następny mecz!</p>
+                    <a href="{% url 'game-list' %}" class="btn btn-success">Zobacz terminarz</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="card text-center">
+                <div class="card-body">
+                    <h5 class="card-title">Drużyny i Trenerzy</h5>
+                    <p class="card-text">Poznaj trenerów i zespoły Legii Warszawa.</p>
+                    <a href="{% url 'coach-list' %}" class="btn btn-warning">Zobacz trenerów</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}
         </main>
 
         <!-- Footer Section -->

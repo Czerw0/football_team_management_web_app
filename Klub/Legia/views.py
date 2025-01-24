@@ -1,13 +1,11 @@
 from django.http import Http404
 from django.shortcuts import redirect, render
-from .forms import PlayerForm, CoachForm, AssistantForm, TeamForm
-from .models import Player, Coach, Assistant, Team
+from .forms import PlayerForm, CoachForm, AssistantForm, TeamForm, GameForm
+from .models import Player, Coach, Assistant, Team, Game
 
 
 def welcome_view(request):
     return render(request, "Legia/base.html")
-
-
 
 # PLAYER VIEWS
 def player_list(request):
@@ -200,3 +198,50 @@ def team_delete(request, id):
     except Team.DoesNotExist:
         raise Http404("Team not found")
     return redirect('team-list')
+#---------------------------------------------------------------------------------
+def game_list(request):
+    game = Game.objects.filter(name__icontains=request.POST['phrase']) if request.method == 'POST' else Game.objects.all()
+    return render(request, "Legia/game/list.html", {'games': game})
+
+
+def game_detail(request, id):
+    try:
+        game = Game.objects.get(id=id)
+    except Game.DoesNotExist:
+        raise Http404("Assistant not found")
+    return render(request, "Legia/game/detail.html", {'game': game})
+
+
+def game_create(request):
+    if request.method == 'POST':
+        form = GameForm(request.POST)
+        if form.is_valid():
+            game = form.save()
+            return redirect('game-detail', game.id)
+    else:
+        form = GameForm()
+    return render(request, "Legia/game/create.html", {'form': form})
+
+
+def game_update(request, id):
+    try:
+        game = Game.objects.get(id=id)
+    except Game.DoesNotExist:
+        raise Http404("Game not found")
+    if request.method == 'POST':
+        form = GameForm(request.POST, instance=game)
+        if form.is_valid():
+            game = form.save()
+            return redirect('game-detail', game.id)
+    else:
+        form = GameForm(instance=game)
+    return render(request, "Legia/game/update.html", {'form': form})
+
+
+def game_delete(request, id):
+    try:
+        game = Game.objects.get(id=id)
+        game.delete()
+    except Game.DoesNotExist:
+        raise Http404("Game not found")
+    return redirect('game-list')

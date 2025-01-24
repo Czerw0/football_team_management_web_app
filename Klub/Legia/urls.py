@@ -23,5 +23,10 @@ urlpatterns = [
     path('team/add', views.team_create, name='team-create'),
     path('team/<int:id>/change', views.team_update, name='team-update'),
     path('team/<int:id>/delete', views.team_delete, name='team-delete'),
+    path('game', views.game_list, name='game-list'),  # Corrected games
+    path('game/<int:id>', views.game_detail, name='game-detail'),
+    path('game/add', views.game_create, name='game-create'),
+    path('game/<int:id>/change', views.game_update, name='game-update'),
+    path('game/<int:id>/delete', views.game_delete, name='game-delete'),
 ]
 
