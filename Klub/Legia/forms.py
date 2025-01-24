@@ -1,8 +1,13 @@
 from django import forms
-from .models import Player
+from .models import Player, Coach
 
 
 class PlayerForm(forms.ModelForm):
    class Meta:
      model = Player
+     fields = '__all__'
+
+class CoachForm(forms.ModelForm):
+   class Meta:
+     model = Coach
      fields = '__all__'

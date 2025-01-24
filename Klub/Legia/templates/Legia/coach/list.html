@@ -1,0 +1,50 @@
+{% extends "Legia/base.html" %}
+
+{% block title %}Lista Trenerów{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="text-success">Lista Trenerów</h2>
+        <a href="{% url 'coach-create' %}" class="btn btn-success">Dodaj nowego Trenera</a>
+    </div>
+
+    <div class="card p-4 mb-4">
+        <h5 class="card-title">Wyszukaj po nazwisku</h5>
+        <form action="" method="post">
+            {% csrf_token %}
+            <div class="form-group me-2">
+                <input type="text" name="phrase" class="form-control" placeholder="Wpisz nazwisko">
+            </div>
+            <button type="submit" class="btn btn-primary">Szukaj</button>
+        </form>
+    </div>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Drużyna</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for coach in coachs %}
+                <tr>
+                    <td>{{ coach.firstname }}</td>
+                    <td>{{ coach.lastname }}</td>
+                    <td>{{ coach.team.name }}</td>
+                    <td>
+                        <a href="{% url 'coach-detail' coach.id %}" class="btn btn-info btn-sm">Szczegóły</a>
+                        <a href="{% url 'coach-update' coach.id %}" class="btn btn-warning btn-sm">Edytuj</a>
+                        <a href="{% url 'coach-delete' coach.id %}" class="btn btn-danger btn-sm">Usuń</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock %}
