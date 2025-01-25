@@ -7,7 +7,7 @@ from .models import Player, Coach, Assistant, Team, Game
 def welcome_view(request):
     return render(request, "Legia/base.html")
 
-# PLAYER VIEWS
+
 def player_list(request):
     players = Player.objects.filter(lastname__icontains=request.POST['phrase']) if request.method == 'POST' else Player.objects.all()
     return render(request, "Legia/player/list.html", {'players': players})
@@ -56,7 +56,7 @@ def player_delete(request, id):
     return redirect('player-list')
 
 
-# COACH VIEWS
+
 def coach_list(request):
     coachs = Coach.objects.filter(lastname__icontains=request.POST['phrase']) if request.method == 'POST' else Coach.objects.all()
     return render(request, "Legia/coach/list.html", {'coachs': coachs})
@@ -104,7 +104,6 @@ def coach_delete(request, id):
         raise Http404("Coach not found")
     return redirect('coach-list')
 
-#------------------------------------------------------------
 def assistant_list(request):
     assistants = Assistant.objects.filter(lastname__icontains=request.POST['phrase']) if request.method == 'POST' else Assistant.objects.all()
     return render(request, "Legia/assistant/list.html", {'assistants': assistants})
@@ -151,7 +150,8 @@ def assistant_delete(request, id):
     except Assistant.DoesNotExist:
         raise Http404("Assistant not found")
     return redirect('assistant-list')
-#-------------------------------------------------------------------
+
+
 def team_list(request):
     team = Team.objects.filter(name__icontains=request.POST['phrase']) if request.method == 'POST' else Team.objects.all()
     return render(request, "Legia/team/list.html", {'teams': team})
@@ -198,7 +198,8 @@ def team_delete(request, id):
     except Team.DoesNotExist:
         raise Http404("Team not found")
     return redirect('team-list')
-#---------------------------------------------------------------------------------
+
+
 def game_list(request):
     game = Game.objects.filter(name__icontains=request.POST['phrase']) if request.method == 'POST' else Game.objects.all()
     return render(request, "Legia/game/list.html", {'games': game})

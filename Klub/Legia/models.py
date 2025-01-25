@@ -2,7 +2,7 @@ from django.db import models
 import calendar
 from django.core.exceptions import ValidationError
 
-# Player, Team, Coach, Assistant, Game 
+
 GAMES_SPOTS = (
     ('Na wyjeździe', 'Na wyjeździe'),
     ('U siebie', "U siebie")
@@ -54,7 +54,7 @@ PLEC = (
 
 class Team(models.Model):
     name = models.CharField(max_length=100, choices=TEAMS)
-    capacity = models.PositiveBigIntegerField(null = True)  # Maksymalna liczba zawodników w drużynie
+    capacity = models.PositiveBigIntegerField(null = True)  
 
     def __str__(self):
         return f"{self.name}"
