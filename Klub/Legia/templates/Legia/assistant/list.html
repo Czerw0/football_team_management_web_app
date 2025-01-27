@@ -15,6 +15,7 @@
             <div class=a"form-group me-2">
                 <input type="text" name="phrase" class="form-control" placeholder="Wpisz nazwisko">
             </div>
+            <p></p>
             <button type="submit" class="btn btn-primary">Szukaj</button>
         </form>
     </div>
@@ -38,7 +39,7 @@
                         <td>{{ assistant.lastname }}</td>
                         <td>{{ assistant.specialization }}</td>
                         <td>{{ assistant.team }}</td>
-                        <td>
+                        <td align="center">
                             <a href="{% url 'assistant-detail' assistant.id %}" class="btn btn-info btn-sm">Szczegóły</a>
                             <a href="{% url 'assistant-update' assistant.id %}" class="btn btn-warning btn-sm">Edytuj</a>
                             <form method="post" action="{% url 'assistant-delete' assistant.id %}" style="display:inline;">
