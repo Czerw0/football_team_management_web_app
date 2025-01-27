@@ -54,14 +54,15 @@ PLEC = (
 
 class Team(models.Model):
     name = models.CharField(max_length=100, choices=TEAMS)
-    capacity = models.PositiveBigIntegerField(null = True)  
+    capacity = models.PositiveBigIntegerField(null = True)
 
     def __str__(self):
         return f"{self.name}"
 
     def current_player_count(self):
         """Zwraca aktualną liczbę zawodników w drużynie."""
-        return self.player_set.count()
+        return self.players.count()
+        
 
 
 class Player(models.Model):
@@ -72,7 +73,7 @@ class Player(models.Model):
     position = models.CharField(max_length=100, choices=POSITIONS)
     number = models.PositiveBigIntegerField()
     signing_date = models.DateTimeField(auto_now_add=True)
-    team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL)
+    team = models.ForeignKey(Team,related_name='players', null=True, blank=True, on_delete=models.SET_NULL)
 
     def __str__(self):
         return f'{self.firstname} {self.lastname} ; {self.position} ; {self.team}'

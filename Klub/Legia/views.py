@@ -1,11 +1,12 @@
 from django.http import Http404
-from django.shortcuts import redirect, render
+from django.shortcuts import redirect, render, get_object_or_404
 from .forms import PlayerForm, CoachForm, AssistantForm, TeamForm, GameForm
 from .models import Player, Coach, Assistant, Team, Game
 
 
 def welcome_view(request):
     return render(request, "Legia/base.html")
+
 
 
 def player_list(request):
@@ -153,16 +154,19 @@ def assistant_delete(request, id):
 
 
 def team_list(request):
-    team = Team.objects.filter(name__icontains=request.POST['phrase']) if request.method == 'POST' else Team.objects.all()
-    return render(request, "Legia/team/list.html", {'teams': team})
+    teams = Team.objects.all()
+
+    for team in teams:
+        team.player_count = team.players.count()  
+    return render(request, "Legia/team/list.html", {'teams': teams})
 
 
 def team_detail(request, id):
-    try:
-        team = Team.objects.get(id=id)
-    except Team.DoesNotExist:
-        raise Http404("Assistant not found")
-    return render(request, "Legia/team/detail.html", {'team': team})
+    team = get_object_or_404(Team, id=id)
+    players = team.players.all()  
+
+    return render(request, "Legia/team/detail.html", {'team': team, 'players': players})
+
 
 
 def team_create(request):
@@ -199,6 +203,19 @@ def team_delete(request, id):
         raise Http404("Team not found")
     return redirect('team-list')
 
+def team_player_count(request, team_id):
+    try:
+        team = Team.objects.get(id=team_id)
+    except Team.DoesNotExist:
+        raise Http404("Team not found")
+    player_count = Player.objects.filter(team=team).count()
+
+    return render(request, "Legia/team/detail.html", {
+        'team': team,
+        'player_count': player_count
+    })
+
+
 
 def game_list(request):
     game = Game.objects.filter(opponent__icontains=request.POST['phrase']) if request.method == 'POST' else Game.objects.all()
@@ -222,6 +239,7 @@ def game_create(request):
     else:
         form = GameForm()
     return render(request, "Legia/game/create.html", {'form': form})
+
 
 
 def game_update(request, id):

@@ -35,10 +35,10 @@
                     <span class="badge bg-secondary">{{ game.date }}</span>
                 </div>
                 <p class="card-text">
-                    <strong>Drużyna Legii:</strong> {{ game.team.name|default:"Brak przypisania" }}
+                    <strong>Drużyna:</strong> {{ game.team.name|default:"Brak przypisania" }}<br>
                     <strong>Miejsce meczu:</strong> {{ game.game_spot }} <br>
                     <strong>Typ rozgrywek:</strong> {{ game.game_type }} <br>
-                    <strong>Wynik:</strong> Legia {{ game.score_legia }} : {{ game.score_opponent }} {{ game.opponent }}
+                    <strong>Wynik:</strong> Twoja drużyna {{ game.score_legia }} : {{ game.score_opponent }} {{ game.opponent }}
                 </p>
                 <div class="d-flex justify-content-end", >
                     <a href="{% url 'game-detail' game.id %}" class="btn btn-info btn-sm me-2">Szczegóły</a>

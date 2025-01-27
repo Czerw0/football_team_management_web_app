@@ -25,25 +25,26 @@
             <button type="submit" class="btn btn-primary">Szukaj</button>
         </form>
     </div>
-
-    <h4 class="mb-3">Aktualnie w moim klubie są poniżsi zawodnicy:</h4>
-    <div class="table-responsive">
+    </head>
+    <body>
+      <h4 class="mb-3">Aktualnie w twoim klubie są poniżsi zawodnicy:</h4>
+      <div class="table-responsive">
         <table class="table table-striped table-bordered">
-            <thead class="table-dark">
-                <tr>
-                    <th>ID</th>
-                    <th>Imię</th>
-                    <th>Nazwisko</th>
-                    <th>Data urodzenia</th>
-                    <th>Płeć</th>
-                    <th>Pozycja</th>
-                    <th>Numer na koszulce</th>
-                    <th>Data podpisania kontraktu</th>
-                    <th>Drużyna</th>
-                    <th>Akcje</th>
-                </tr>
-            </thead>
-            <tbody>
+          <thead class="table-dark">
+            <tr align="center">
+              <th>ID</th>
+              <th>Imię</th>
+              <th>Nazwisko</th>
+              <th>Data urodzenia</th>
+              <th>Płeć</th>
+              <th>Pozycja</th>
+              <th>Numer na koszulce</th>
+              <th>Data podpisania kontraktu</th>
+              <th>Drużyna</th>
+              <th>Akcje</th>
+            </tr>
+        </thead>
+    <tbody>
             {% for player in players %}
             <tr>
                 <td>{{ player.id }}</td>

@@ -23,6 +23,7 @@ class TeamForm(forms.ModelForm):
      fields = '__all__'
 
 class GameForm(forms.ModelForm):
-   class Meta:
-     model = Game
-     fields = '__all__'
+
+    class Meta:
+      model = Game
+      fields = '__all__'

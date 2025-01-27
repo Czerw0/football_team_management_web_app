@@ -9,7 +9,50 @@
     
     <div class="card p-4">
         <p><strong>Drużyna:</strong> {{ team.name }}</p>
-        <p><strong>Limit zawodników: </strong> {{ team.capacity }}</p>
+        <p><strong>Pojemność:</strong> {{ team.capacity }}</p>
+        <p><strong>Liczba zawodników:</strong> {{ team.current_player_count }}</p>
+    </div>
+
+    <h3>Zawodnicy drużyny:</h3>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered">
+            <thead class="table-dark">
+                <tr align="center">
+                    <th>ID</th>
+                    <th>Imię</th>
+                    <th>Nazwisko</th>
+                    <th>Data urodzenia</th>
+                    <th>Płeć</th>
+                    <th>Pozycja</th>
+                    <th>Numer na koszulce</th>
+                    <th>Data podpisania kontraktu</th>
+                    <th>Akcje</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for player in players %}
+                <tr>
+                    <td>{{ player.id }}</td>
+                    <td>{{ player.firstname }}</td>
+                    <td>{{ player.lastname }}</td>
+                    <td>{{ player.birth }}</td>
+                    <td>{{ player.plec }}</td>
+                    <td>{{ player.position }}</td>
+                    <td>{{ player.number }}</td>
+                    <td>{{ player.signing_date }}</td>
+                    <td align="center">
+                        <a href="{% url 'player-detail' player.id %}" class="btn btn-info btn-sm">Szczegóły</a>
+                        <a href="{% url 'player-update' player.id %}" class="btn btn-warning btn-sm">Edytuj</a>
+                        <a href="{% url 'player-delete' player.id %}" class="btn btn-danger btn-sm">Usuń</a>
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="9">Brak zawodników w tej drużynie.</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
 </div>
 {% endblock %}
