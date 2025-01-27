@@ -201,7 +201,7 @@ def team_delete(request, id):
 
 
 def game_list(request):
-    game = Game.objects.filter(name__icontains=request.POST['phrase']) if request.method == 'POST' else Game.objects.all()
+    game = Game.objects.filter(opponent__icontains=request.POST['phrase']) if request.method == 'POST' else Game.objects.all()
     return render(request, "Legia/game/list.html", {'games': game})
 
 
