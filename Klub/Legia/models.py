@@ -69,11 +69,11 @@ class Player(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
     birth = models.DateField()
-    plec = models.CharField(max_length=100, choices=PLEC, null=True)
+    gender = models.CharField(max_length=100, choices=PLEC, null=True)
     position = models.CharField(max_length=100, choices=POSITIONS)
     number = models.PositiveBigIntegerField()
     signing_date = models.DateTimeField(auto_now_add=True)
-    team = models.ForeignKey(Team,related_name='players', null=True, blank=True, on_delete=models.SET_NULL)
+    team = models.ForeignKey(Team,related_name='players', null=True, blank=True, on_delete=models.CASCADE)
 
     def __str__(self):
         return f'{self.firstname} {self.lastname} ; {self.position} ; {self.team}'
@@ -93,7 +93,7 @@ class Coach(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
     birth = models.DateField()
-    plec = models.CharField(max_length=100, choices=PLEC, null = True)
+    gender = models.CharField(max_length=100, choices=PLEC, null = True)
     signing_date = models.DateTimeField(auto_now_add=True)
     team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL)
 
@@ -104,7 +104,7 @@ class Assistant(models.Model):
     firstname = models.CharField(max_length=50)
     lastname = models.CharField(max_length=50)
     birth = models.DateField()
-    plec = models.CharField(max_length=100, choices=PLEC, null = True)
+    gender = models.CharField(max_length=100, choices=PLEC, null = True)
     signing_date = models.DateTimeField(auto_now_add=True)
     specialization = models.CharField(max_length=50, choices=SPECIALIZATIONS)
     team = models.ForeignKey(Team, null=True, blank=True, on_delete=models.SET_NULL)

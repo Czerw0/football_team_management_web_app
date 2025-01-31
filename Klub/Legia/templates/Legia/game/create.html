@@ -16,33 +16,40 @@
         <form action="" method="post">
             {% csrf_token %}
             
-            <div class="row">
+            <div class="row"align="justify">
                 <div class="col-md-6 mb-3">
                     {{ form.opponent.label_tag }}
+                    <br>
                     {{ form.opponent }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.team.label_tag }}
+                    <br>
                     {{ form.team }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.game_spot.label_tag }}
+                    <br>
                     {{ form.game_spot }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.game_type.label_tag }}
+                    <br>
                     {{ form.game_type }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.date.label_tag }}
+                    <br>
                     {{ form.date }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.score_legia.label_tag }}
+                    <br>
                     {{ form.score_legia }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.score_opponent.label_tag }}
+                    <br>
                     {{ form.score_opponent }}
                 </div>
                 

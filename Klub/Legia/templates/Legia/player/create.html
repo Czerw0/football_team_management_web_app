@@ -15,38 +15,43 @@
 
         <form action="" method="post">
             {% csrf_token %}
-            
-            <div class="row">
+            <div class="row" align="justify">
                 <div class="col-md-6 mb-3">
                     {{ form.firstname.label_tag }}
+                    <br>
                     {{ form.firstname }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.lastname.label_tag }}
+                    <br>
                     {{ form.lastname }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.birth.label_tag }}
+                    <br>
                     {{ form.birth }}
                 </div>
                 <div class="col-md-6 mb-3">
-                    {{ form.plec.label_tag }}
-                    {{ form.plec }}
+                    {{ form.gender.label_tag }}
+                    <br>
+                    {{ form.gender }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.position.label_tag }}
+                    <br>
                     {{ form.position }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.number.label_tag }}
+                    <br>
                     {{ form.number }}
                 </div>
                 <div class="col-md-6 mb-3">
                     {{ form.team.label_tag }}
+                    <br>
                     {{ form.team }}
                 </div>
             </div>
-
             <div class="d-flex justify-content-end">
                 <button type="submit" class="btn btn-success px-4">✅ Dodaj zawodnika</button>
             </div>
