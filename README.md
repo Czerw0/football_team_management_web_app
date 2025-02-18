@@ -1,1 +1,1 @@
-Tam management web app with polish display
+Team management web app with polish display
